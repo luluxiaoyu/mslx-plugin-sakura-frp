@@ -3,7 +3,7 @@ using MSLX.SDK.IServices;
 using MSLX.SDK.Models;
 using Newtonsoft.Json.Linq;
 
-namespace MSLX.Plugin.Demo.Controllers;
+namespace MSLX.Plugin.Sakura.Frp.Controllers;
 
 [ApiController]
 // 路由规范：api/plugin/{plugin-id}/[controller]

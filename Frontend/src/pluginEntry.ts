@@ -5,7 +5,7 @@ import {GitBranchIcon} from "tdesign-icons-vue-next";
 import InstanceCardInject from "./views/InstanceCardInject.vue";
 
 export const pluginConfig = {
-    name: 'DemoMenuPlugin',
+    name: 'mslx-plugin-sakura-frp',
     version: '1.0.0',
 
     // 注入路由

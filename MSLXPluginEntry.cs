@@ -1,35 +1,22 @@
 ﻿using MSLX.SDK;
 
-namespace MSLX.Plugin.Demo;
+namespace MSLX.Plugin.Sakura.Frp;
 
 public class MSLXPluginEntry : IPlugin
 {
-    public string Id => "mslx-plugin-demo"; 
-    public string Name => "MSLX 示例插件";
-    public string Description => "这是MSLX的示例插件，简单演示了一些插件可实现的功能，可以前往Github查看具体实现~";
-    public string Version => "1.1.0";
-    public string Icon => "icon.png";
-    public string MinSDKVersion => "1.4.0";
+    public string Id => "mslx-plugin-sakura-frp"; 
+    public string Name => "SakuraFrp 官版Frpc";
+    public string Description => "快捷将SakuraFrp隧道添加到MSLX的服务端实例中，解决MSLX原生隧道不支持自定义frpc客户端导致无法使用上游的新特性问题。";
+    public string Version => "1.0";
+    public string Icon => "https://www.natfrp.com/favicon.ico";
+    public string MinSDKVersion => "1.4.4";
     public string Developer => "luluxiaoyu";
-    public string AuthorUrl => "https://mslx.mslmc.cn/plugin-dev/init/start/";
-    public string PluginUrl => "https://github.com/MSLTeam/mslx-plugin-demo";
+    public string AuthorUrl => "https://github.com/luluxiaoyu";
+    public string PluginUrl => "https://mslx-plugins.mslmc.net/plugins/mslx-plugin-sakura-frp";
 
     public async void OnLoad()
     {
-        SDK.MSLX.Logger.Info("mslx-plugin-demo 载入成功~");
-        SDK.MSLX.Logger.Info("当前存在实例数量：" + SDK.MSLX.Config.Servers.GetServerList().Count.ToString());
-        
-        // ===== 配置读写示例 =====
-        string dataDir = this.Config().GetDataPath();
-        SDK.MSLX.Logger.Info("使用的数据目录："+dataDir);
-        
-        this.Config().WriteConfigKey("author", "xiaoyu");
-        this.Config().WriteConfigKey("magicNumber", 1027);
-        
-        int count = (int?)this.Config().ReadConfigKey("magicNumber") ?? 0;
-        SDK.MSLX.Logger.Info("从配置文件读取magicNumber：" + count.ToString());
-        
-        var allConfig = this.Config().ReadConfig();
+        SDK.MSLX.Logger.Info("SakuraFrp 官版Frpc 插件载入中···");
         
         // ===== 下载器调用示例 ===== 
         SDK.MSLX.Logger.Info("准备下载文件...");
@@ -59,6 +46,6 @@ public class MSLXPluginEntry : IPlugin
     }
 
     public void OnUnload() {
-        SDK.MSLX.Logger.Info("mslx-plugin-demo 卸载成功~");
+        SDK.MSLX.Logger.Info("SakuraFrp 官版Frpc 插件卸载成功~");
     }
 }
