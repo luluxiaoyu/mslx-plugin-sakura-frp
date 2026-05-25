@@ -432,6 +432,12 @@ async function handleDeleteTunnel() {
               </div>
 
               <div class="mt-8">
+                <div class="mb-3.5 text-[13px] text-zinc-500 dark:text-zinc-400 flex items-start gap-1.5 px-1">
+                  <t-icon name="info-circle" class="text-[var(--color-primary)] mt-0.5 shrink-0" />
+                  <span class="leading-relaxed">
+                    <strong>提示：</strong>本插件采用 SakuraFrp 官方版 Frpc，完美支持上游最新特性。创建映射后，请前往「服务端列表」启动。
+                  </span>
+                </div>
                 <t-button theme="primary" size="large" :loading="isAddingTunnel" block class="!rounded-xl !h-12 !font-bold shadow-md" @click="handleUseTunnel">
                   <template #icon><play-circle-icon /></template>
                   一键创建映射实例
