@@ -19,23 +19,29 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
             if (string.IsNullOrWhiteSpace(request?.Config))
             {
                 return BadRequest(new ApiResponse<object>
-            {
-                Code = 400,
-                Message = "配置文件内容不能为空"
-            });
+                {
+                    Code = 400,
+                    Message = "配置文件内容不能为空"
+                });
             }
 
             try
             {
-                string dataPath = MSLXPluginEntry.Instance.Config().GetDataPath();
+                string dataPath = MSLXPluginEntry.Instance.Config().GetDataPath().Replace("\\", "/");
                 if (!Directory.Exists(dataPath))
                 {
                     Directory.CreateDirectory(dataPath);
                 }
                 
                 long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                string configFileName = $"{timestamp}.ini";
-                string configFullPath = Path.Combine(dataPath, configFileName);
+                string instanceDirPath = $"{dataPath}/{timestamp}";
+                if (!Directory.Exists(instanceDirPath))
+                {
+                    Directory.CreateDirectory(instanceDirPath);
+                }
+                
+                string configFileName = "config.ini";
+                string configFullPath = $"{instanceDirPath}/{configFileName}";
 
                 System.IO.File.WriteAllText(configFullPath, request.Config);
                 
@@ -48,7 +54,7 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
                 string exeFullPath;
                 if (existingFiles.Length > 0)
                 {
-                    exeFullPath = existingFiles[0];
+                    exeFullPath = existingFiles[0].Replace("\\", "/");
                 }
                 else
                 {
@@ -66,10 +72,11 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
                     Code = 200,
                     Message = "配置文件创建成功",
                     Data = new JObject() {
-                    ["configName"] = configFileName,
-                    ["configPath"] = configFullPath,
-                    ["startCommand"] = startCommand
-                }
+                        ["configName"] = configFileName,
+                        ["configPath"] = configFullPath,
+                        ["instancePath"] = instanceDirPath,
+                        ["startCommand"] = startCommand
+                    }
                 });
             }
             catch (Exception ex)

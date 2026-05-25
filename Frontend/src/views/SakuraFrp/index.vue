@@ -185,6 +185,7 @@ async function handleUseTunnel() {
 
     const targetData = pluginRes.code === 200 ? pluginRes.data : pluginRes;
     const startCommand = targetData?.startCommand;
+    const instancePath = targetData?.instancePath || null;
 
     if (!startCommand) {
       throw new Error('未能从插件接口成功提取启动指令，请检查后端运行状态');
@@ -194,7 +195,7 @@ async function handleUseTunnel() {
       url: '/api/instance/createServer',
       data: {
         name: `${currentTunnel.value.name} | ${currentNodeName.value}`,
-        path: null,
+        path: instancePath,
         java: 'none',
         core: 'none',
         coreUrl: '',
