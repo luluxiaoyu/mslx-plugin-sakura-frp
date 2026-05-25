@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MSLX.Plugin.Sakura.Frp.Models;
 using MSLX.SDK;
@@ -9,6 +10,7 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
 {
     [ApiController]
     [Route("api/plugins/mslx-plugin-sakura-frp/frp")]
+    [Authorize(Roles = "admin")]
     public class FrpController : ControllerBase
     {
         [HttpPost("config")]
