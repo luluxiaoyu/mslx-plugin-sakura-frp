@@ -11,6 +11,8 @@ import { onMounted, ref, computed } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import CreateTunnelDialog from './components/CreateTunnelDialog.vue';
 
+const stores = (window as any).MSLX_Stores;
+const instanceStore = stores?.useInstanceListStore?.();
 const request = (window as any).mslxRequest;
 
 const showCreateDialog = ref(false);
@@ -211,6 +213,9 @@ async function handleUseTunnel() {
 
     const newServerId = createRes?.serverId || createRes?.data?.serverId || '';
     MessagePlugin.success(`SakuraFrp 隧道实例 (ID: ${newServerId}) 已成功创建`);
+    if (instanceStore && typeof instanceStore.refreshInstanceList === 'function') {
+      await instanceStore.refreshInstanceList();
+    }
 
     changeUrl('/instance/list');
 
