@@ -12,6 +12,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import CreateTunnelDialog from './components/CreateTunnelDialog.vue';
 
 const stores = (window as any).MSLX_Stores;
+const router = (window as any).VueRouter?.useRouter?.();
 const instanceStore = stores?.useInstanceListStore?.();
 const request = (window as any).mslxRequest;
 
@@ -47,11 +48,10 @@ const changeUrl = (url: string) => {
     return;
   }
 
-  const router = (window as any).VueRouter?.useRouter?.();
   if (router) {
     router.push(url);
   } else {
-    window.location.hash = url;
+    window.location.href = url;
   }
 };
 
