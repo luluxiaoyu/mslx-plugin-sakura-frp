@@ -65,7 +65,16 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
                     });
                 }
                 
-                string startCommand = $"\"{exeFullPath}\" -c \"{configFullPath}\"";
+                string startCommand;
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    // 逆天Windows 得加多一层双引号
+                    startCommand = $"\"\"{exeFullPath}\" -c \"{configFullPath}\"\"";
+                }
+                else
+                {
+                    startCommand = $"\"{exeFullPath}\" -c \"{configFullPath}\"";
+                }
 
                 return Ok(new ApiResponse<object>()
                 {
@@ -88,6 +97,36 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
                 });
             }
         }
+
+        [HttpPost("encode/{id}")]
+        public IActionResult UpdateServerEncoding([FromRoute] uint id) 
+        {
+            McServerInfo.ServerInfo? serverInfo = MSLX.SDK.MSLX.Config.Servers.GetServer(id);
+            
+            if (serverInfo == null)
+            {
+                return NotFound(new ApiResponse<object>
+                {
+                    Code = 404,
+                    Message = $"找不到 ID 为 {id} 的实例"
+                });
+            }
+            
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                serverInfo.FileEncoding = "utf-8";
+                serverInfo.OutputEncoding = "utf-8";
+                
+                MSLX.SDK.MSLX.Config.Servers.UpdateServer(serverInfo);
+            }
+            
+            return Ok(new ApiResponse<object>
+            {
+                Code = 200,
+                Message = "实例编码配置更新成功"
+            });
+        }
+        
 
         private string GetPlatformKey()
         {

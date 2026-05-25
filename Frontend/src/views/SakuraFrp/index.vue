@@ -212,6 +212,15 @@ async function handleUseTunnel() {
     });
 
     const newServerId = createRes?.serverId || createRes?.data?.serverId || '';
+    if (newServerId) {
+      try {
+        await request.post({
+          url: `/api/plugins/mslx-plugin-sakura-frp/frp/encode/${newServerId}`
+        });
+      } catch (encodeErr) {
+        console.warn('修改实例编码失败，如果是 Windows 系统可能会有乱码:', encodeErr);
+      }
+    }
     MessagePlugin.success(`SakuraFrp 隧道实例 (ID: ${newServerId}) 已成功创建`);
     if (instanceStore && typeof instanceStore.refreshInstanceList === 'function') {
       await instanceStore.refreshInstanceList();
