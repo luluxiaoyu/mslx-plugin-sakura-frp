@@ -9,7 +9,7 @@ public class MSLXPluginEntry : IPlugin
     public string Id => "mslx-plugin-sakura-frp"; 
     public string Name => "SakuraFrp 官版Frpc";
     public string Description => "快捷将SakuraFrp隧道添加到MSLX的服务端实例中，解决MSLX原生隧道不支持自定义frpc客户端导致无法使用上游的新特性问题。";
-    public string Version => "1.0.2";
+    public string Version => "1.0.2.1";
     public string Icon => "https://www.natfrp.com/favicon.ico";
     public string MinSDKVersion => "1.4.4";
     public string Developer => "luluxiaoyu";
