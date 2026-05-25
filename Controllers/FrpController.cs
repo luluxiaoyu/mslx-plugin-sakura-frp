@@ -27,21 +27,21 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
 
             try
             {
-                string dataPath = MSLXPluginEntry.Instance.Config().GetDataPath().Replace("\\", "/");
+                string dataPath = MSLXPluginEntry.Instance.Config().GetDataPath();
                 if (!Directory.Exists(dataPath))
                 {
                     Directory.CreateDirectory(dataPath);
                 }
                 
                 long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                string instanceDirPath = $"{dataPath}/{timestamp}";
+                string instanceDirPath = Path.Combine(dataPath, timestamp.ToString());
                 if (!Directory.Exists(instanceDirPath))
                 {
                     Directory.CreateDirectory(instanceDirPath);
                 }
                 
                 string configFileName = "config.ini";
-                string configFullPath = $"{instanceDirPath}/{configFileName}";
+                string configFullPath = Path.Combine(instanceDirPath, configFileName);
 
                 System.IO.File.WriteAllText(configFullPath, request.Config);
                 
@@ -50,11 +50,11 @@ namespace MSLX.Plugin.Sakura.Frp.Controllers
                 string searchPattern = $"frpc_*_{platformKey}{ext}";
 
                 string[] existingFiles = Directory.GetFiles(dataPath, searchPattern);
-
                 string exeFullPath;
+                
                 if (existingFiles.Length > 0)
                 {
-                    exeFullPath = existingFiles[0].Replace("\\", "/");
+                    exeFullPath = existingFiles[0];
                 }
                 else
                 {
