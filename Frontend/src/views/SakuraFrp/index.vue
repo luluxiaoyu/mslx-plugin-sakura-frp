@@ -268,10 +268,7 @@ async function handleDeleteTunnel() {
   <div class="mx-auto pb-6 text-[var(--td-text-color-primary)]">
 
     <div v-if="sakuraToken === ''" class="flex items-center justify-center min-h-[70vh] list-item-anim">
-      <div class="design-card relative w-full max-w-md rounded-3xl border border-[var(--td-component-border)] shadow-xl p-10 text-center overflow-hidden" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent); backdrop-filter: blur(12px);">
-
-        <div class="absolute -top-20 -right-20 w-60 h-60 bg-[var(--color-primary)] opacity-10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--color-primary)] opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="design-card relative w-full max-w-md rounded-3xl border border-[var(--td-component-border)] shadow-xl p-10 text-center overflow-hidden" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent); ">
 
         <div class="relative z-10 flex flex-col items-center">
           <div class="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-sm border" style="background-color: color-mix(in srgb, var(--color-primary) 10%, transparent); border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);">
@@ -299,7 +296,7 @@ async function handleDeleteTunnel() {
     <div v-else id="app-space" class="relative flex flex-col gap-6">
       <t-loading attach="#app-space" :loading="loading" text="加载数据中..." />
 
-      <div v-if="userInfo" class="design-card list-item-anim rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent); backdrop-filter: blur(12px); animation-delay: 0s;">
+      <div v-if="userInfo" class="design-card list-item-anim rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent); animation-delay: 0s;">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-dashed border-zinc-200/70 dark:border-zinc-700/60">
           <div class="flex flex-col">
             <h3 class="text-lg font-bold text-[var(--td-text-color-primary)] m-0 leading-none">SakuraFrp 账户信息</h3>
@@ -336,7 +333,7 @@ async function handleDeleteTunnel() {
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div class="lg:col-span-5 xl:col-span-4 design-card list-item-anim flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm h-[580px]" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent); backdrop-filter: blur(12px); animation-delay: 0.1s;">
+        <div class="lg:col-span-5 xl:col-span-4 design-card list-item-anim flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm h-[580px]" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent);  animation-delay: 0.1s;">
           <div class="flex items-center justify-between p-4 sm:p-5 border-b border-dashed border-zinc-200/70 dark:border-zinc-700/60 shrink-0">
             <h3 class="text-base font-bold text-[var(--td-text-color-primary)] m-0">我的隧道</h3>
             <div class="flex items-center gap-1">
@@ -381,7 +378,7 @@ async function handleDeleteTunnel() {
           </div>
         </div>
 
-        <div class="lg:col-span-7 xl:col-span-8 design-card list-item-anim flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm h-[580px]" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent); backdrop-filter: blur(12px); animation-delay: 0.2s;">
+        <div class="lg:col-span-7 xl:col-span-8 design-card list-item-anim flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm h-[580px]" style="background-color: color-mix(in srgb, var(--td-bg-color-container) 80%, transparent);  animation-delay: 0.2s;">
           <template v-if="currentTunnel">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 border-b border-dashed border-zinc-200/70 dark:border-zinc-700/60 shrink-0">
               <div class="flex flex-col min-w-0">
@@ -471,17 +468,6 @@ async function handleDeleteTunnel() {
   }
 }
 
-@keyframes smoothLoadingGlass {
-  from {
-    backdrop-filter: blur(0.01px) !important;
-    -webkit-backdrop-filter: blur(0.01px) !important;
-  }
-  to {
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
-  }
-}
-
 .custom-scrollbar {
   overflow-y: auto;
 }
@@ -496,7 +482,6 @@ async function handleDeleteTunnel() {
 :deep(.t-loading__overlay) {
   border-radius: 1rem !important;
   background-color: rgba(255, 255, 255, 0.5) !important;
-  animation: smoothLoadingGlass 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
 }
 
 html[theme='dark'] :deep(.t-loading__overlay) {
